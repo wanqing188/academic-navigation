@@ -83,6 +83,8 @@ window.ACADEMIC_QUICK=['chatgpt','cnki','scholar','readpaper','zotero','deepl'];
 
   function load() { try { state = { ...state, ...JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') }; } catch {} }
   function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  /* 只放行 http/https，挡掉 javascript:、data: 等可执行伪协议；校验通过返回原字符串，不做任何规范化改写 */
+  function safeUrl(value) { try { const url = new URL(String(value)); return url.protocol === 'http:' || url.protocol === 'https:' ? String(value).trim() : ''; } catch { return ''; } }
   function iconCandidates(item) {
     let host = '';
     try { host = new URL(item.url).hostname.toLowerCase().replace(/^www\./, ''); } catch {}
@@ -111,7 +113,7 @@ window.ACADEMIC_QUICK=['chatgpt','cnki','scholar','readpaper','zotero','deepl'];
   function makeCard(item) {
     const node = $('#card').content.firstElementChild.cloneNode(true);
     node.dataset.id = item.id;
-    node.querySelector('.link').href = item.url;
+    const href = safeUrl(item.url); if (href) node.querySelector('.link').href = href;
     applyIcon(node.querySelector('.logo'), item);
     node.querySelector('.link b').textContent = item.name;
     node.querySelector('.link small').textContent = item.description;
@@ -209,13 +211,14 @@ window.ACADEMIC_QUICK=['chatgpt','cnki','scholar','readpaper','zotero','deepl'];
   $('#theme').onclick = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; save(); setTheme(); };
   $('#clear-recent').onclick = () => { state.recent = []; save(); renderWorkspace(); };
   $('#form').onsubmit = event => {
-    event.preventDefault(); const id = $('#id').value || `custom-${Date.now()}`, old = find(id);
-    const item = { id, name: $('#name').value.trim(), url: $('#url').value.trim(), description: $('#description').value.trim() || '自定义资源', category: $('#category').value, mark: '', color: '#55799a' };
+    event.preventDefault(); const url = safeUrl($('#url').value); if (!url) { alert('网址无效：只支持 http:// 或 https:// 开头的地址'); return; }
+    const id = $('#id').value || `custom-${Date.now()}`, old = find(id);
+    const item = { id, name: $('#name').value.trim(), url, description: $('#description').value.trim() || '自定义资源', category: $('#category').value, mark: '', color: '#55799a' };
     if (old && !old.id.startsWith('custom-')) { const group = base.find(category => category.id === old.category); group.links.splice(group.links.findIndex(entry => entry.id === id), 1); }
     state.custom = state.custom.filter(entry => entry.id !== id); state.custom.push(item); save(); $('#editor').close(); renderAll();
   };
   $('#export').onclick = () => { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' })); link.download = 'academic-navigation-config.json'; link.click(); URL.revokeObjectURL(link.href); };
-  $('#import').onchange = event => { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const data = JSON.parse(reader.result); if (!Array.isArray(data.custom) || !Array.isArray(data.favorites) || !Array.isArray(data.recent)) throw new Error(); state = { ...state, ...data }; save(); renderAll(); } catch { alert('配置文件格式无效'); } }; reader.readAsText(file); };
+  $('#import').onchange = event => { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const data = JSON.parse(reader.result); if (!Array.isArray(data.custom) || !Array.isArray(data.favorites) || !Array.isArray(data.recent)) throw new Error(); const custom = data.custom.filter(item => item && safeUrl(item.url)), skipped = data.custom.length - custom.length; state = { ...state, ...data, custom }; save(); renderAll(); if (skipped) alert(`配置已导入，但有 ${skipped} 条资源的网址不受支持（只允许 http/https），已跳过。`); } catch { alert('配置文件格式无效'); } }; reader.readAsText(file); };
   function tick() { const date = new Date(); $('#clock').textContent = date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); $('#today').textContent = date.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'short' }); }
   load(); renderAll(); tick(); setInterval(tick, 10000);
 })();
