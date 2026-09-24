@@ -1,0 +1,10 @@
+# 操作系统与编辑器产生的本地文件
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*~
+
+# 开发工具
+.claude/
+.statamcp/
