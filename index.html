@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f8fb"><title>Academic Navigation</title>
+  <style>
+:root{--bg:#f6f8fb;--surface:#fff;--soft:#f0f4f8;--text:#19283a;--muted:#66778a;--line:#dfe7ef;--primary:#214b72;--accent:#4d759c;--shadow:0 8px 24px rgba(31,61,91,.07);--radius:16px;color-scheme:light;font-family:Inter,"HarmonyOS Sans SC","Microsoft YaHei",sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);line-height:1.5}.skip{position:fixed;top:-80px;left:12px;z-index:9;background:var(--primary);color:#fff;padding:8px}.skip:focus{top:12px}.topbar{height:72px;display:flex;align-items:center;gap:28px;padding:0 max(24px,calc((100vw - 1400px)/2));position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid color-mix(in srgb,var(--line) 65%,transparent)}.brand{display:flex;gap:10px;align-items:center;color:inherit;text-decoration:none;font:600 24px Georgia,"Noto Serif SC",serif;white-space:nowrap}.brand>b{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--primary);color:#fff}.brand small{display:block;font:600 12px Inter,sans-serif;letter-spacing:1.25px;color:var(--muted);margin-top:1px}nav{display:flex;gap:4px;overflow:auto;flex:1}nav a{color:var(--muted);font-size:13px;text-decoration:none;padding:7px 10px;border-radius:8px;white-space:nowrap}nav a:hover{background:var(--soft);color:var(--primary)}.actions{display:flex;gap:8px;align-items:center}.icon,.text,.command,.star,.more,.menu button{border:0;background:transparent;color:var(--muted);cursor:pointer;font:inherit}.icon{font-size:20px;width:34px;height:34px;border-radius:9px}.icon:hover,.more:hover{background:var(--soft);color:var(--primary)}.command{display:flex;gap:18px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:7px 9px 7px 12px;font-size:13px}.command kbd,.search kbd{font:11px ui-monospace,monospace;color:var(--muted);background:var(--soft);padding:2px 5px;border-radius:4px}.hero{max-width:1400px;margin:0 auto;padding:94px 24px 48px;text-align:center}.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.55px;color:var(--accent);margin:0 0 10px}.hero h1,h2{font-family:Georgia,"Noto Serif SC",serif}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.18;letter-spacing:-1.5px;margin:0}.hero>p:not(.eyebrow){color:var(--muted);margin:16px 0 30px}.search{height:58px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;display:flex;align-items:center;gap:12px;padding:0 16px;text-align:left}.search>span{font-size:27px;line-height:0;color:var(--primary)}.search input{border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:15px;flex:1;min-width:0}.search:focus-within{outline:3px solid color-mix(in srgb,var(--accent) 22%,transparent);border-color:var(--accent)}.results{position:absolute;z-index:4;left:50%;transform:translateX(-50%);width:min(852px,calc(100% - 48px));background:var(--surface);border:1px solid var(--line);border-radius:0 0 14px 14px;box-shadow:var(--shadow);margin-top:-48px;padding:8px;text-align:left}.result{width:100%;display:flex;gap:12px;align-items:center;background:transparent;border:0;padding:9px;border-radius:9px;cursor:pointer;text-align:left;color:var(--text)}.result:hover{background:var(--soft)}.result b{font-size:14px}.result small{display:block;color:var(--muted)}.stats{max-width:1100px;margin:0 auto 50px;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}.stats>div{padding:14px 24px;border-left:1px solid var(--line);display:flex;flex-direction:column}.stats>div:first-child{border-left:0}.stats b{font:600 33px Georgia,serif;color:var(--primary)}.stats span{font-size:18px;color:var(--muted)}main{padding-bottom:70px}.workspace,.categories{max-width:1400px;margin:0 auto;padding:0 24px}.workspace{margin-bottom:58px}.heading{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}.heading h2{font-size:38px;margin:0}.heading p:not(.eyebrow){font-size:20px;color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.card{position:relative;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);transition:.18s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}.link{display:flex;align-items:center;gap:18px;min-height:118px;padding:21px;color:inherit;text-decoration:none}.logo{flex:none;width:55px;height:55px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:18px;font-weight:800;letter-spacing:-.4px;background:var(--logo,#315b82);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}.link>span:last-child{min-width:0}.link b{display:block;font-size:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.link small{display:block;font-size:16px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:3px}.star,.more{position:absolute;width:28px;height:28px;top:6px;border-radius:8px;font-size:18px;line-height:1}.star{right:38px;color:#a4afb9}.star.active{color:#bb8a32}.more{right:6px}.menu{position:absolute;right:6px;top:34px;z-index:3;border:1px solid var(--line);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);padding:4px}.menu button{display:block;width:100%;text-align:left;padding:6px 11px;border-radius:6px;font-size:12px}.menu button:hover{background:var(--soft)}.category{padding-top:20px;margin-top:34px;border-top:1px solid var(--line);scroll-margin-top:80px}.category-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}.category h2{font-size:42px;margin:0}.description,.count{font-size:20px;color:var(--muted);margin:5px 0 0}.count{font:18px ui-monospace,monospace}footer{border-top:1px solid var(--line);padding:22px max(24px,calc((100vw - 1400px)/2));display:flex;gap:18px;align-items:center;color:var(--muted);font-size:12px}footer span:nth-child(2){flex:1}.text{font-size:12px;color:var(--primary);padding:5px}.text:hover{text-decoration:underline}dialog{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:18px;width:min(440px,calc(100vw - 40px));box-shadow:0 24px 70px rgba(9,25,44,.25)}dialog::backdrop{background:rgba(14,29,45,.4);backdrop-filter:blur(2px)}dialog form{padding:22px}.dialog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.dialog-head h2{font-size:22px;margin:0}dialog label{display:block;font-size:12px;color:var(--muted);margin-top:13px}dialog input,dialog select{display:block;width:100%;border:1px solid var(--line);border-radius:8px;margin-top:5px;padding:9px;background:var(--bg);color:var(--text);font:14px inherit}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.dialog-actions button{font:inherit;padding:8px 14px;border-radius:8px;cursor:pointer;border:1px solid var(--line);color:var(--text);background:transparent}.dialog-actions .primary{border:0;background:var(--primary);color:#fff}body.dark{--bg:#111a25;--surface:#182432;--soft:#223244;--text:#edf3f8;--muted:#9baabb;--line:#2c4053;--primary:#8cb8df;--accent:#9dc7ea;--shadow:0 10px 27px rgba(0,0,0,.25);color-scheme:dark}@media(max-width:1150px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}nav{display:none}}@media(max-width:720px){.topbar{height:62px;padding:0 16px}.brand small,.command{font-size:0}.command{width:34px;height:34px;padding:0}.command:before{content:'⌕';font-size:24px}.command kbd{display:none}.hero{padding:64px 18px 36px}.stats{margin-bottom:38px;padding:0 18px;grid-template-columns:repeat(2,1fr);gap:12px}.stats>div{border-left:0;border-bottom:1px solid var(--line);padding:9px 5px}.workspace,.categories{padding:0 18px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.link{min-height:108px;padding:16px;gap:14px}.logo{width:51px;height:51px}.heading p:not(.eyebrow){display:none}footer{padding:20px 18px;flex-wrap:wrap}.results{width:calc(100% - 36px)}}
+/* Baidu search — clean style, aligned with index.html */
+.search-wrap{max-width:1352px;margin:24px auto 36px;display:flex;align-items:flex-end;gap:16px}
+.search-logo{flex-shrink:0;display:flex;align-items:center}
+.search-logo img{display:block;height:117px;width:auto;vertical-align:middle}
+.baidu-search{display:flex;flex:1;height:60px;border-radius:10px;background:#fff;border:2px solid #4E6EF2;transition:border .25s,box-shadow .25s;overflow:visible;position:relative}
+.baidu-search:focus-within{border-color:#3b5de7;box-shadow:0 0 0 3px rgba(78,110,242,0.12)}
+.baidu-search input{flex:1;border:none;padding:12px 18px;font-size:18px;font-family:inherit;outline:none;background:transparent;color:#333;caret-color:#333;min-width:0}
+.baidu-search input::placeholder{color:#c4c7ce}
+.baidu-search .baidu-submit{border:none;background:linear-gradient(136deg,#286aff,#4e6ef2,#7274f9,#9f66ff);color:#fff;padding:0 40px;font-size:18px;font-weight:500;cursor:pointer;font-family:inherit;letter-spacing:1px;transition:opacity .2s;min-width:108px;border-radius:0 8px 8px 0}
+.baidu-search .baidu-submit:hover{background:linear-gradient(rgba(0,0,0,0.07),rgba(0,0,0,0.07)),linear-gradient(136deg,#286aff,#4e6ef2,#7274f9,#9f66ff)}
+.search-box-wrap{position:relative;flex:1;display:flex}
+.baidu-suggestions{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #e0e4ed;border-top:none;border-radius:0 0 10px 10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);z-index:50;overflow:hidden;margin-top:-1px}
+.baidu-suggestions:not([hidden]){display:block}
+.baidu-suggestion{display:flex;align-items:center;gap:0;width:100%;border:0;padding:9px 18px;font-size:14px;color:#333;cursor:pointer;font-family:inherit;text-align:left;background:transparent;transition:background .15s}
+.baidu-suggestion:before{content:'⌕';font-size:18px;color:#929292;line-height:1;flex-shrink:0}
+.baidu-suggestion:hover,.baidu-suggestion.active{background:#f5f7ff;color:#4E6EF2}
+.baidu-suggestion .match{color:#f33;font-weight:700}
+.dark .baidu-search{background:#fff}
+.dark .baidu-search input{color:#333}
+.dark .baidu-suggestions{background:#fff}
+@media(max-width:768px){.search-wrap{margin:20px auto 28px;gap:10px;flex-wrap:wrap;justify-content:center}.search-logo img{height:42px}.baidu-search{height:52px;border-radius:8px}.baidu-search input{padding:10px 14px;font-size:15px}.baidu-search .baidu-submit{padding:0 18px;font-size:14px;min-width:70px;border-radius:0 6px 6px 0}}
+
+/* Card logo — white background, image fills the container */
+.logo{background:#fff;overflow:hidden;border:1px solid color-mix(in srgb,var(--line) 75%,transparent);box-shadow:none;border-radius:13px}
+.logo img{display:block;width:100%;height:100%;object-fit:cover;padding:0}
+.result .logo{flex:none}
+
+/* Compact cards and consistent, crisp controls. */
+.hero{padding-top:16px;padding-bottom:8px}
+.hero-title-row{width:100%;max-width:1352px;min-height:88px;margin:0 auto 4px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;text-align:center}
+.hero-title-row h1{grid-column:2;grid-row:1}
+.hero-title-row .stats{position:static;align-self:end;max-width:none;width:auto;margin:0;padding:0;display:flex;align-items:center}
+.hero-title-row .resource-stat{grid-column:1;grid-row:1;justify-self:start;text-align:left}
+.hero-title-row .date-stat{grid-column:3;grid-row:1;justify-self:end;text-align:right}
+.hero-title-row .stats>div{min-width:0;padding:0;border:0;display:grid;grid-template-rows:auto auto;align-items:start;gap:4px}
+.hero-title-row .date-stat>div{justify-items:end}
+.hero-title-row .stats b{font:600 44px/1.1 Georgia,serif;white-space:nowrap}
+.hero-title-row .stats span{font-size:26px;line-height:1.2;white-space:nowrap}
+.search-wrap{margin:18px auto 28px}
+.search-layout{position:relative;width:100%;max-width:1352px;margin:0 auto 4px;display:block;text-align:left}
+.search-layout .search-wrap{width:100%;max-width:1352px;min-width:0;margin:0 0 8px;align-items:flex-end;gap:16px}
+.search-layout .search-logo img{height:117px}
+.favicon-preview{display:flex;align-items:center;gap:10px;margin-top:6px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:54px}
+.favicon-preview img{width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff}
+.favicon-preview img[hidden]{display:none}
+.favicon-preview span{font-size:12px;color:var(--muted)}
+.search-logo img{height:82px}
+.stats{margin-bottom:30px}
+.stats>div{padding:10px 20px}
+.stats b{font-size:28px}
+.stats span{font-size:15px}
+.workspace{margin-bottom:34px}
+.heading{margin-bottom:12px}
+.heading h2{font-size:31px}
+.heading p:not(.eyebrow){font-size:15px}
+.grid{gap:11px}
+#recent.grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.link{min-height:96px;padding:24px 20px;gap:16px;justify-content:flex-start;align-items:center;text-align:left}
+.logo{width:48px;height:48px;border-radius:12px}
+.link b{font-size:17px}
+.link small{font-size:13px;margin-top:1px}
+.link>span:last-child{flex:1;min-width:0}
+.card{border-radius:14px}
+.card:hover{transform:translateY(-2px)}
+.category{padding-top:14px;margin-top:24px;scroll-margin-top:76px}
+.category-head{margin-bottom:12px}
+.category h2{font-size:32px}
+.description,.count{font-size:15px}
+.card-actions{position:absolute;top:3px;right:5px;display:flex;gap:1px}
+.card-action{display:grid;place-items:center;width:24px;height:24px;padding:0;border:0;border-radius:6px;background:transparent;color:var(--muted);cursor:pointer}
+.card-action svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.card-action:hover,.card-action:focus-visible{background:var(--soft);color:var(--primary)}
+.card-actions[hidden]{display:none}
+.card-action.favorite.active{color:#d49b32}
+.card-action.favorite.active svg{fill:color-mix(in srgb,#edb640 23%,transparent);stroke:#d49b32}
+.card.dragging{opacity:.38}
+.card.drag-preview{position:fixed;top:0;left:0;z-index:12;pointer-events:none;margin:0;opacity:.94;box-shadow:0 12px 30px #203c572f;border-color:var(--accent);transition:none}
+body.moving-cards,body.moving-cards *{cursor:grabbing!important;user-select:none}
+.card .link{user-select:none;-webkit-touch-callout:none}
+.grid:empty{min-height:48px;border:1px dashed var(--line);border-radius:12px}
+.pick-card{position:absolute;inset:0;z-index:2;border-radius:inherit;cursor:pointer}
+.pick-card input{position:absolute;right:9px;top:8px;width:16px;height:16px;margin:0;accent-color:var(--primary)}
+.card:has(.pick-card input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+.card:has(.pick-card input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.grid.drop-target{outline:2px dashed color-mix(in srgb,var(--accent) 62%,transparent);outline-offset:4px;border-radius:12px}
+.card.drop-before:before,.card.drop-after:after{content:"";position:absolute;top:10px;bottom:10px;width:3px;border-radius:3px;background:#20b8e2;z-index:4}
+.card.drop-before:before{left:-7px}.card.drop-after:after{right:-7px}
+.category-tools,.batch-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.category-tools .count{margin:0 3px 0 0;font:12px/1.4 ui-monospace,"Microsoft YaHei",sans-serif;color:var(--muted)}
+.category-tools button{font:inherit;font-size:12px;border:1px solid var(--line);border-radius:7px;padding:4px 8px;color:var(--primary);background:var(--surface);cursor:pointer;white-space:nowrap}
+.category-tools button:hover{background:var(--soft);border-color:var(--accent);text-decoration:none}
+.category-tools .confirm-delete:enabled{background:#a53b43;border-color:#a53b43;color:white}
+.category-tools button:disabled{opacity:.48;cursor:default}
+.heading,.category-head{gap:10px;flex-wrap:wrap}
+@media(max-width:1899px){
+  .search-layout{display:flex;flex-direction:column;align-items:stretch}
+  .search-layout .search-wrap{max-width:none;margin:0 0 8px}
+}
+@media(max-width:1399px){
+  .hero-title-row{min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:8px;margin-bottom:10px}
+  .hero-title-row h1{grid-column:1/-1;grid-row:2}
+  .hero-title-row .resource-stat{grid-column:1;grid-row:1;justify-self:start}
+  .hero-title-row .date-stat{grid-column:2;grid-row:1;justify-self:end}
+  .hero-title-row .stats b{font-size:clamp(24px,2.3vw,32px)}
+  .hero-title-row .stats span{font-size:clamp(16px,1.4vw,20px)}
+}
+@media(max-width:720px){
+  .hero{padding-top:16px;padding-bottom:8px}.search-logo img{height:42px}
+  .hero-title-row{row-gap:6px;margin-bottom:8px}
+  .hero-title-row .stats>div{gap:4px;padding:0 4px}
+  .hero-title-row .stats b{font-size:24px}
+  .hero-title-row .stats span{font-size:14px}
+  .search-layout{width:100%;max-width:100%;display:flex;flex-direction:column;gap:0;margin:0 auto 4px}
+  .search-layout .search-wrap{gap:10px;flex-wrap:wrap;justify-content:flex-start}
+  .search-layout .search-logo img{height:42px}
+  #recent.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .workspace{margin-bottom:28px}.heading h2{font-size:27px}.category h2{font-size:28px}
+  .grid{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
+  .link{min-height:92px;padding:23px 16px;gap:12px}.logo{width:44px;height:44px}
+  .category-tools{gap:5px}
+}
+
+</style>
+</head>
+<body>
+  <a class="skip" href="#content">跳至内容</a>
+  <header class="topbar"><a class="brand" href="#top"><b>A</b><span>Academic Navigation</span></a><nav id="nav" aria-label="分类导航"></nav><div class="actions"><button class="icon" id="theme" title="切换主题">◐</button></div></header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-title-row"><section class="stats resource-stat" aria-label="科研资源总数"><div><b id="total">0</b><span>科研资源</span></div></section><h1>把研究资源安静地放在一起</h1><section class="stats date-stat" aria-label="日期时间"><div><b id="clock">--:--</b><span id="today">今日</span></div></section></div>
+      <div class="search-layout">
+        <div class="search-wrap"><a class="search-logo" href="https://www.baidu.com" target="_blank" rel="noopener" aria-label="百度"><img src="logos/baidu_logo.png" alt="百度"></a><form class="baidu-search" id="baidu-form" role="search"><div class="search-box-wrap"><input id="query" type="search" placeholder="搜索你想要的…" autocomplete="off" aria-label="百度搜索"><div class="baidu-suggestions" id="baidu-suggestions" hidden role="listbox" aria-label="百度搜索建议"></div></div><button type="submit" class="baidu-submit">百度一下</button></form></div>
+      </div>
+    </section>
+    <section class="workspace" id="favorite-section" hidden><div class="heading"><div><h2>我的收藏</h2></div><div class="category-tools"><div class="batch-tools"></div></div></div><div class="grid compact" id="favorites" data-zone="favorites"></div></section>
+    <section class="workspace" id="recent-section" hidden><div class="heading"><div><h2>最近访问</h2></div><div class="category-tools"><div class="batch-tools"></div></div></div><div class="grid compact" id="recent" data-zone="recent"></div></section>
+    <section id="content" class="categories"></section>
+  </main>
+  <footer><span>Academic Navigation 2.0</span><span>个人科研工作台 · 数据保存在本机浏览器中</span><button class="text" id="export">导出配置</button><label class="text">导入配置<input id="import" type="file" accept="application/json" hidden></label></footer>
+  <dialog id="editor"><form method="dialog" id="form"><div class="dialog-head"><h2 id="form-title">添加资源</h2><button class="icon" value="cancel" formnovalidate>×</button></div><input id="id" type="hidden"><label>名称<input id="name" required maxlength="40"></label><label>网址<input id="url" required type="url"></label><label>网站图标<div class="favicon-preview"><img id="favicon-preview" alt="网站图标预览" hidden><span id="favicon-status">输入网址后自动获取网站图标</span></div></label><label>描述<input id="description" maxlength="80"></label><label>分类<select id="category"></select></label><div class="dialog-actions"><button value="cancel" formnovalidate>取消</button><button value="default" class="primary">保存</button></div></form></dialog>
+  <template id="card">
+    <article class="card">
+      <a class="link" target="_blank" rel="noopener" draggable="false">
+        <span class="logo"><img alt="" loading="lazy" draggable="false"></span>
+        <span><b></b><small></small></span>
+      </a>
+      <div class="card-actions">
+        <button class="card-action favorite" type="button" title="收藏" aria-label="收藏"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 3 2.75 5.58 6.16.9-4.46 4.35 1.05 6.14L12 17.07l-5.5 2.9 1.05-6.14L3.1 9.48l6.16-.9L12 3Z"/></svg></button>
+        <button class="card-action edit" type="button" title="编辑" aria-label="编辑"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 5 5 5M4 20l4.2-.9L19 8.3a2.1 2.1 0 0 0-3-3L5.2 16.1 4 20Z"/><path d="M13 20h7"/></svg></button>
+      </div>
+    </article>
+  </template>
+  <script>
+/* Default, deduplicated research resource library. */
+window.ACADEMIC_DATA=[
+ {id:'ai',title:'AI 助手',description:'模型、检索与知识工作',color:'#4e789e',links:[['chatgpt','ChatGPT','OpenAI 对话与研究助手','https://chatgpt.com','GPT'],['deepseek','DeepSeek','深度推理与代码','https://chat.deepseek.com','DS'],['gemini','Gemini','Google AI 助手','https://gemini.google.com','GM'],['notebooklm','NotebookLM','基于资料的研究笔记','https://notebooklm.google.com','NL'],['kimi','Kimi','长文档阅读','https://kimi.moonshot.cn','KM'],['yuanbao','腾讯元宝','腾讯 AI 助手','https://yuanbao.tencent.com','元'],['tongyi','通义千问','阿里云 AI 助手','https://platform.qianwenai.com/try-ai','通'],['metaso','秘塔 AI 搜索','中文 AI 搜索','https://metaso.cn','MT'],['xinghuo','讯飞星火','科大讯飞 AI 助手','https://xinghuo.xfyun.cn','星'],['wenxin','文心一言','百度 AI 助手','https://yiyan.baidu.com','文心']]},
+ {id:'database',title:'学术数据库',description:'检索、文献与知识库',color:'#496e8c',links:[['cnki','中国知网','中文学术文献数据库','https://www.cnki.net','CN'],['scholar','Google Scholar','全球学术检索','https://scholar.google.com','GS'],['semantic','Semantic Scholar','AI 驱动论文检索','https://www.semanticscholar.org','SS'],['researchgate','ResearchGate','研究者与论文社区','https://www.researchgate.net','RG'],['cssn','中国社会科学网','社会科学资料','https://www.cssn.cn','CSSN'],['rdfybk','人大复印资料','人文社科文献','https://www.rdfybk.com','RDF'],['xinhuawz','新华文摘','人文社科文摘','https://www.xinhuawz.com','XH'],['aea','美国经济学会','经济学资源库','https://www.aeaweb.org','AEA'],['readpaper','ReadPaper','论文阅读与管理','https://readpaper.com','RP'],['libgen','LibGen','开放图书检索','https://libgen.rs','LG'],['jiumo','鸠摩搜书','电子书检索','https://www.jiumodiary.com','JM'],['pinggu','人大经济论坛','经济学术交流论坛','https://bbs.pinggu.org','经管'],['muchong','小木虫论坛','学术科研社区','https://muchong.com','小木'],['doubanbook','豆瓣读书','图书检索与书评','https://book.douban.com','豆瓣']]},
+ {id:'journals',title:'重点期刊',description:'经济、管理与综合研究',color:'#685f8f',links:[['jjyj','经济研究','中国经济学研究期刊','https://erj.ajcass.com','经济'],['glsj','管理世界','管理学研究期刊','http://www.mwm.net.cn/web/','管理'],['sjjj','世界经济','国际经济研究期刊','http://ejournaliwep.cssn.cn/qkjj/sjjj/','世界'],['gyjj','中国工业经济','产业经济研究期刊','https://ciejournal.ajcass.com','工业'],['jryj','金融研究','金融学研究期刊','http://www.jryj.org.cn','金融'],['jjxjk','经济学季刊','北京大学经济学期刊','https://ccj.pku.edu.cn','季刊'],['sljj','数量经济技术经济研究','数量经济研究','https://www.jqte.net','数量'],['dlyj','地理研究','地理学研究期刊','https://www.dlyj.ac.cn','地理'],['nature','Nature','国际综合科学期刊','https://www.nature.com','N'],['science','Science','国际科学期刊','https://www.science.org','S']]},
+ {id:'tools',title:'科研与写作',description:'翻译、引用与学术写作',color:'#477d74',links:[['zotero','Zotero','文献管理工具','https://www.zotero.org','Z'],['deepl','DeepL','高质量机器翻译','https://www.deepl.com/translator','DL'],['overleaf','Overleaf','在线 LaTeX 写作','https://www.overleaf.com','TeX'],['typst','Typst','现代排版系统','https://typst.app','TY'],['doi','DOI Resolver','DOI 快速跳转','https://doi.org','DOI']]},
+ {id:'news',title:'新闻与政策',description:'权威资讯与公共政策',color:'#8a6b47',links:[['people','人民网','权威新闻与评论','https://www.people.com.cn','人'],['xinhuanet','新华网','国家通讯社新闻','https://www.news.cn','新'],['ce','中国经济网','经济政策与数据','https://www.ce.cn','经'],['qiushi','求是网','理论与政策','https://www.qstheory.cn','求'],['gmw','光明网','文化与社会新闻','https://www.gmw.cn','光'],['studytimes','学习时报','学习与理论','https://www.studytimes.cn','学'],['kjrb','科技日报','科技政策资讯','https://epaper.stdaily.com/statics/technology-site/index.html#/','科'],['cnhubei','荆楚网','湖北地方资讯','http://www.cnhubei.com','荆'],['ifeng','凤凰网','综合新闻资讯','https://www.ifeng.com','凤'],['tencentnews','腾讯新闻','综合新闻平台','https://news.qq.com','腾']]},
+ {id:'code',title:'开发与数据',description:'编程、开源与数据科学',color:'#566a87',links:[['github','GitHub','代码托管与协作','https://github.com','GH'],['csdn','CSDN','中文开发者社区','https://www.csdn.net','C'],['stackoverflow','Stack Overflow','开发者问答','https://stackoverflow.com','SO'],['mdn','MDN','Web 开发文档','https://developer.mozilla.org','MDN'],['pypi','PyPI','Python 软件包索引','https://pypi.org','Py'],['huggingface','Hugging Face','模型与数据集','https://huggingface.co','HF'],['kaggle','Kaggle','数据科学社区','https://www.kaggle.com','K'],['npm','npm','JavaScript 包管理器','https://www.npmjs.org','npm'],['runoob','菜鸟教程','编程入门教程','https://www.runoob.com','菜鸟'],['leetcode','LeetCode','算法与编程练习','https://leetcode.cn','LC']]},
+ {id:'learning',title:'教学与日常',description:'学习、搜索与常用服务',color:'#7b647d',links:[['hubu','湖北大学','学校门户','https://www.hubu.edu.cn','湖大'],['hbtv','长江云','湖北新闻平台','https://news.hbtv.com.cn/index/index','云'],['jd','京东','综合电商购物','https://www.jd.com','京'],['tencentvideo','腾讯视频','影视剧与综艺','https://v.qq.com','视'],['bilibili','哔哩哔哩','课程与知识视频','https://www.bilibili.com','B'],['mail126','126 邮箱','网易邮箱服务','https://mail.126.com','126'],['qqmail','QQ 邮箱','电子邮件服务','https://mail.qq.com','QQ'],['mooc','中国大学 MOOC','高校在线课程','https://www.icourse163.org','MOOC'],['coursera','Coursera','全球在线课程','https://www.coursera.org','CO'],['zhihu','知乎','知识分享社区','https://www.zhihu.com','知'],['imooc','慕课网','IT 在线学习','https://www.imooc.com','慕课'],['bing','Bing','通用搜索','https://www.bing.com','B'],['pan','百度网盘','云端文件存储','https://pan.baidu.com','盘'],['outlook','Outlook','微软邮箱','https://outlook.live.com','O']]}
+];
+</script><script>
+(() => {
+  const base = ACADEMIC_DATA.map(category => ({
+    ...category,
+    links: category.links.map(([id, name, description, url, mark]) => ({ id, name, description, url, mark, color: category.color, category: category.id }))
+  }));
+  const STORAGE_KEY = 'academic-navigation-v2';
+  const genericIcon = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="16" fill="%23214b72"/%3E%3Cpath d="M18 20h28v26H18zM23 16h18v8H23zM24 31h16M24 38h11" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E';
+  const generatedFallbackIcon = 'logos/academic-resource-fallback.ico';
+  const localLogoById = {};
+  const preferredLocalLogoById = { glsj: 'logos/mwm.net.cn.ico', sjjj: 'logos/sjjj-iwep.ico', gyjj: 'logos/gyjj-iie.ico', sljj: 'logos/iqte.cssn.cn.ico', jryj: 'logos/pbc.gov.cn.ico', kjrb: 'logos/kjrb.com.cn.ico', doubanbook: 'logos/douban-site-logo.png', cnki: 'logos/cnki-site-logo.png', pinggu: 'logos/pinggu-redrawn.svg', deepl: 'logos/deepl-redrawn.svg' };
+  let state = { custom: [], favorites: [], recent: [], theme: 'light', hidden: [], categories: {}, order: {}, overrides: {} };
+  let press = null;
+  let selection = null;
+  const shortcuts = ['favorites', 'recent'];
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  const all = () => [...base.flatMap(category => category.links), ...state.custom]
+    .filter(item => !state.hidden.includes(item.id))
+    .map(item => ({ ...item, ...(state.overrides[item.id] || {}), category: state.categories[item.id] || state.overrides[item.id]?.category || item.category }));
+  const find = id => all().find(item => item.id === id);
+
+  function load() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      state = { ...state, ...saved };
+      delete state.quick;
+      for (const key of ['custom', 'favorites', 'recent', 'hidden']) if (!Array.isArray(state[key])) state[key] = [];
+      for (const key of ['categories', 'order', 'overrides']) if (!state[key] || typeof state[key] !== 'object') state[key] = {};
+      const builtInIds = new Set(base.flatMap(category => category.links.map(item => item.id)));
+      state.custom = state.custom.filter(item => {
+        if (!builtInIds.has(item.id)) return true;
+        state.overrides[item.id] ||= { name: item.name, url: item.url, description: item.description, category: item.category };
+        state.categories[item.id] = item.category;
+        return false;
+      });
+    } catch {}
+  }
+  function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  /* 只放行 http/https，挡掉 javascript:、data: 等可执行伪协议；校验通过返回原字符串，不做任何规范化改写 */
+  function safeUrl(value) { try { const url = new URL(String(value)); return url.protocol === 'http:' || url.protocol === 'https:' ? String(value).trim() : ''; } catch { return ''; } }
+  function iconCandidates(item) {
+    let host = '';
+    try { host = new URL(item.url).hostname.toLowerCase().replace(/^www\./, ''); } catch {}
+    const parts = host.split('.').filter(Boolean);
+    const local = [];
+    if (localLogoById[item.id]) local.push(localLogoById[item.id]);
+    for (let index = 0; index < Math.max(parts.length - 1, 0); index += 1) {
+      const name = parts.slice(index).join('.');
+      local.push(`logos/${name}.ico`, `logos/${name}.png`, `logos/${name}.svg`, `logos/${name}.webp`);
+    }
+    const online = `https://www.google.com/s2/favicons?sz=256&domain_url=${encodeURIComponent(item.url)}`;
+    const preferred = preferredLocalLogoById[item.id];
+    const savedIcon = safeUrl(item.icon);
+    return [...new Set([...(preferred ? [preferred] : []), ...(savedIcon ? [savedIcon] : []), ...local, online, generatedFallbackIcon, genericIcon])];
+  }
+  function applyIcon(container, item) {
+    const image = container.querySelector('img') || document.createElement('img');
+    image.alt = `${item.name} 图标`;
+    const mark = String(item.mark || item.name.slice(0, 1)).slice(0, 3).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[char]));
+    const fallback = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="${item.color || '#315b82'}"/><text x="32" y="36" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="${mark.length > 1 ? 20 : 28}" font-weight="700" fill="white">${mark}</text></svg>`)}`;
+    const candidates = [...iconCandidates(item).filter(icon => icon !== genericIcon && icon !== generatedFallbackIcon), fallback, generatedFallbackIcon];
+    let index = 0;
+    image.src = candidates[index];
+    image.onerror = () => { index += 1; if (index < candidates.length) image.src = candidates[index]; };
+    if (!image.parentElement) container.append(image);
+  }
+  function visit(item) { state.recent = [item.id, ...state.recent.filter(id => id !== item.id)].slice(0, 10); save(); renderWorkspace(); }
+
+  function makeCard(item) {
+    const node = $('#card').content.firstElementChild.cloneNode(true);
+    node.dataset.id = item.id;
+    const href = safeUrl(item.url); if (href) node.querySelector('.link').href = href;
+    applyIcon(node.querySelector('.logo'), item);
+    node.querySelector('.link b').textContent = item.name;
+    node.querySelector('.link small').textContent = item.description;
+    const star = node.querySelector('.favorite');
+    const isFavorite = state.favorites.includes(item.id);
+    star.classList.toggle('active', isFavorite); star.title = isFavorite ? '取消收藏' : '收藏'; star.setAttribute('aria-label', star.title);
+    star.onclick = event => { event.preventDefault(); state.favorites = isFavorite ? state.favorites.filter(id => id !== item.id) : [item.id, ...state.favorites]; save(); renderAll(); };
+    node.querySelector('.link').onclick = () => visit(item);
+    node.querySelector('.edit').onclick = event => { event.preventDefault(); editor(item); };
+    star.setAttribute('aria-pressed', String(isFavorite));
+    return node;
+  }
+
+  function removeSelected(scope, ids) {
+    const keep = id => !ids.has(id);
+    if (shortcuts.includes(scope)) {
+      state[scope] = state[scope].filter(keep);
+    } else {
+      const builtIns = base.flatMap(group => group.links).filter(item => ids.has(item.id));
+      state.hidden = [...new Set([...state.hidden, ...builtIns.map(item => item.id)])];
+      state.custom = state.custom.filter(item => keep(item.id));
+      for (const list of shortcuts) state[list] = state[list].filter(keep);
+      for (const category of base) {
+        if (state.order[category.id]) state.order[category.id] = state.order[category.id].filter(keep);
+      }
+      for (const id of ids) {
+        delete state.overrides[id];
+        delete state.categories[id];
+      }
+    }
+    save();
+  }
+
+  function endSelection() {
+    const scope = selection.scope;
+    selection = null;
+    renderAll();
+    const section = document.getElementById(scope).closest('section');
+    const button = section.querySelector('.batch-tools button:enabled');
+    (button && !section.hidden ? button : $('#content .category-tools button:enabled')).focus();
+  }
+
+  function renderBatchTools(grid, items, active) {
+    const section = grid.closest('section');
+    const tools = section.querySelector('.batch-tools');
+    const count = document.createElement('span');
+    count.className = 'count';
+    count.textContent = items.length + ' 项资源';
+    tools.replaceChildren(count);
+    const add = section.querySelector('.add-resource');
+    if (add) add.hidden = active;
+    function button(text, handler, className = '') {
+      const control = document.createElement('button');
+      control.type = 'button';
+      control.textContent = text;
+      control.className = className;
+      control.onclick = handler;
+      tools.append(control);
+      return control;
+    }
+    if (!active) {
+      const enter = button('删除网址', () => {
+        cancelPress();
+        selection = { scope: grid.dataset.category || grid.id, ids: new Set() };
+        renderAll();
+        document.getElementById(selection.scope).closest('section').querySelector('.pick-card input')?.focus({preventScroll:true});
+      });
+      enter.disabled = items.length === 0;
+      return;
+    }
+
+    const ids = selection.ids;
+    const selectAll = button('全选', () => {
+      const value = ids.size !== items.length;
+      ids.clear();
+      for (const input of grid.querySelectorAll('.pick-card input')) {
+        input.checked = value;
+        if (value) ids.add(input.value);
+      }
+      updateButtons();
+    });
+    const remove = button('', () => {
+      removeSelected(selection.scope, ids);
+      endSelection();
+    }, 'confirm-delete');
+    button('取消', endSelection);
+    function updateButtons() {
+      selectAll.textContent = ids.size === items.length ? '取消全选' : '全选';
+      remove.textContent = '删除所选（' + ids.size + '）';
+      remove.disabled = ids.size === 0;
+    }
+    grid.onchange = event => {
+      const input = event.target;
+      if (!input.matches('.pick-card input')) return;
+      if (input.checked) ids.add(input.value);
+      else ids.delete(input.value);
+      updateButtons();
+    };
+    updateButtons();
+  }
+
+  function fill(grid, items) {
+    const scope = grid.dataset.category || grid.id;
+    const active = selection?.scope === scope;
+    grid.onchange = null;
+    if (active) {
+      const visible = new Set(items.map(item => item.id));
+      selection.ids = new Set([...selection.ids].filter(id => visible.has(id)));
+    }
+    grid.replaceChildren(...items.map(item => {
+      const card = makeCard(item);
+      if (!active) return card;
+      card.querySelector('.card-actions').hidden = true;
+      card.querySelector('.link').inert = true;
+      const label = document.createElement('label');
+      label.className = 'pick-card';
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.value = item.id;
+      input.checked = selection.ids.has(item.id);
+      input.setAttribute('aria-label', '选择' + item.name);
+      label.append(input);
+      card.append(label);
+      return card;
+    }));
+    renderBatchTools(grid, items, active);
+  }
+  // Keep shortcut lists independent. Category drops update the resource category and its saved order.
+  function moveCard(id, grid, target, after) {
+    const item = find(id);
+    if (!grid || !item || id === target?.dataset.id) return;
+    const order = [...grid.children].map(card => card.dataset.id).filter(other => other !== id);
+    const index = target ? order.indexOf(target.dataset.id) + Number(after) : order.length;
+    order.splice(index, 0, id);
+    const category = grid.dataset.category;
+    if (category) {
+      if (item.category !== category) {
+        const previous = state.order[item.category];
+        if (previous) state.order[item.category] = previous.filter(other => other !== id);
+        const custom = state.custom.find(entry => entry.id === id);
+        if (custom) custom.category = category;
+        else state.categories[id] = category;
+      }
+      state.order[category] = order;
+    } else {
+      state[grid.dataset.zone] = order;
+    }
+    save();
+    renderAll();
+  }
+
+  function updateDropTarget() {
+    const hit = document.elementFromPoint(press.x, press.y);
+    const grid = hit?.closest('.grid') || hit?.closest('.workspace, .category')?.querySelector('.grid');
+    const candidate = hit?.closest('.card');
+    const card = candidate?.closest('.grid') === grid ? candidate : null;
+    const rect = card?.getBoundingClientRect();
+    const after = rect && press.x >= rect.left + rect.width / 2;
+    press.grid?.classList.remove('drop-target');
+    press.target?.classList.remove('drop-before', 'drop-after');
+    press.grid = grid;
+    press.target = card;
+    press.after = after;
+    grid?.classList.add('drop-target');
+    if (card && card !== press.card) card.classList.add(after ? 'drop-after' : 'drop-before');
+  }
+
+  function trackDrag() {
+    if (!press?.preview) return;
+    const {x, y, offsetX, offsetY, preview} = press;
+    preview.style.transform = 'translate(' + (x - offsetX) + 'px,' + (y - offsetY) + 'px)';
+    const margin = 65;
+    const edge = y < margin ? y - margin : Math.max(0, y - innerHeight + margin);
+    if (edge) window.scrollBy({top: Math.sign(edge) * Math.min(16, Math.ceil(Math.abs(edge) / 4)), behavior:'instant'});
+    updateDropTarget();
+    press.frame = requestAnimationFrame(trackDrag);
+  }
+
+  function startDrag() {
+    if (!press || !press.card.isConnected) return cancelPress();
+    const card = press.card;
+    const rect = card.getBoundingClientRect();
+    const preview = card.cloneNode(true);
+    preview.inert = true;
+    preview.setAttribute('aria-hidden', 'true');
+    preview.classList.add('drag-preview');
+    preview.style.width = rect.width + 'px';
+    preview.style.height = rect.height + 'px';
+    document.body.append(preview);
+    press.preview = preview;
+    press.offsetX = press.x - rect.left;
+    press.offsetY = press.y - rect.top;
+    card.setPointerCapture(press.pointer);
+    card.classList.add('dragging');
+    document.body.classList.add('moving-cards');
+    trackDrag();
+  }
+
+  function cancelPress() {
+    if (!press) return;
+    const last = press;
+    press = null;
+    clearTimeout(last.timer);
+    cancelAnimationFrame(last.frame);
+    last.preview?.remove();
+    last.grid?.classList.remove('drop-target');
+    last.target?.classList.remove('drop-before','drop-after');
+    last.card.classList.remove('dragging');
+    document.body.classList.remove('moving-cards');
+    if (last.card.hasPointerCapture(last.pointer)) last.card.releasePointerCapture(last.pointer);
+  }
+
+  // The link covers the card. Its own padding is blank space; its children are the logo and text.
+  let swallowClick = false;
+  document.addEventListener('pointerdown', event => {
+    cancelPress();
+    swallowClick = false;
+    if (selection || !event.isPrimary || event.button !== 0 || !event.target.matches('.card, .card > .link')) return;
+    const card = event.target.closest('.card');
+    press = {card, pointer:event.pointerId, x:event.clientX, y:event.clientY,
+      startX:event.clientX, startY:event.clientY, timer:setTimeout(startDrag, 420)};
+  });
+  document.addEventListener('pointermove', event => {
+    if (press?.pointer !== event.pointerId) return;
+    press.x = event.clientX;
+    press.y = event.clientY;
+    if (!press.preview && Math.hypot(press.x - press.startX, press.y - press.startY) > 7) cancelPress();
+  });
+  // Allow normal touch scrolling until the hold is recognized.
+  document.addEventListener('touchmove', event => {
+    if (press?.preview && event.cancelable) event.preventDefault();
+  }, {passive:false});
+  document.addEventListener('contextmenu', event => {
+    if (press && press.card.contains(event.target)) event.preventDefault();
+  });
+  document.addEventListener('pointerup', event => {
+    if (event.pointerId !== press?.pointer) return;
+    if (!press.preview) return cancelPress();
+    swallowClick = true;
+    press.x = event.clientX;
+    press.y = event.clientY;
+    updateDropTarget();
+    const {card, grid, target, after} = press;
+    cancelPress();
+    moveCard(card.dataset.id, grid, target, after);
+  });
+  document.addEventListener('click', event => {
+    if (swallowClick && event.detail) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      swallowClick = false;
+    }
+  }, true);
+  for (const eventName of ['pointercancel','lostpointercapture']) {
+    document.addEventListener(eventName, event => {
+      if (event.pointerId === press?.pointer) cancelPress();
+    });
+  }
+  window.addEventListener('blur', cancelPress);
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || document.querySelector('dialog[open]')) return;
+    if (press?.preview) swallowClick = true;
+    cancelPress();
+    if (selection) endSelection();
+  });
+
+  function renderNav() { $('#nav').innerHTML = base.map(category => `<a href="#${category.id}">${category.title}</a>`).join(''); }
+  function renderWorkspace() {
+    const normalizedRecent = [...new Set(state.recent.filter(id => find(id)))].slice(0, 10);
+    if (normalizedRecent.length !== state.recent.length || normalizedRecent.some((id, index) => id !== state.recent[index])) {
+      state.recent = normalizedRecent;
+      save();
+    }
+    const favorites = state.favorites.map(find).filter(Boolean), recent = state.recent.map(find).filter(Boolean);
+    $('#favorite-section').hidden = !favorites.length; $('#recent-section').hidden = !recent.length;
+    fill($('#favorites'), favorites);
+    fill($('#recent'), recent);
+  }
+  function renderCategories() {
+    const host = $('#content'); host.innerHTML = '';
+    base.forEach(category => {
+      const links = all().filter(item => item.category === category.id);
+      const ordered = state.order[category.id] || [];
+      links.sort((a, b) => { const ai = ordered.indexOf(a.id), bi = ordered.indexOf(b.id); return (ai < 0 ? Infinity : ai) - (bi < 0 ? Infinity : bi); });
+      const section = document.createElement('section'); section.className = 'category'; section.id = category.id;
+      section.innerHTML = `<div class="category-head"><div><h2>${category.title}</h2></div><div class="category-tools"><div class="batch-tools"></div><button class="text add-resource" type="button">＋ 添加网址</button></div></div><div class="grid" data-zone="category" data-category="${category.id}"></div>`;
+      const grid = section.querySelector('.grid'); fill(grid, links);
+      section.querySelector('.add-resource').onclick = () => editor(null, category.id);
+      host.append(section);
+    });
+    $('#total').textContent = all().length;
+  }
+  function setTheme() { document.body.classList.toggle('dark', state.theme === 'dark'); $('#theme').textContent = state.theme === 'dark' ? '☀' : '◐'; }
+  function renderAll() { renderNav(); renderWorkspace(); renderCategories(); setTheme(); }
+
+  let faviconTimer = null;
+  let faviconRequest = 0;
+  let selectedFavicon = '';
+  let faviconSourceUrl = '';
+  function requestFavicon(value, existingIcon = '') {
+    const requestId = ++faviconRequest;
+    const url = safeUrl(value);
+    const image = $('#favicon-preview');
+    const status = $('#favicon-status');
+    selectedFavicon = '';
+    faviconSourceUrl = url;
+    if (!url) {
+      image.hidden = true;
+      status.textContent = '输入网址后自动获取网站图标';
+      return;
+    }
+    const page = new URL(url);
+    const candidates = [...new Set([
+      safeUrl(existingIcon),
+      `${page.origin}/favicon.ico`,
+      `https://www.google.com/s2/favicons?sz=128&domain_url=${encodeURIComponent(url)}`
+    ].filter(Boolean))];
+    let index = 0;
+    status.textContent = '正在获取网站图标…';
+    image.hidden = false;
+    function tryNext() {
+      if (requestId !== faviconRequest) return;
+      if (index >= candidates.length) {
+        image.hidden = true;
+        status.textContent = '未找到图标，卡片将显示网站名称缩写';
+        return;
+      }
+      image.onerror = tryNext;
+      image.onload = () => {
+        if (requestId !== faviconRequest) return;
+        selectedFavicon = candidates[index - 1];
+        status.textContent = '已获取网站图标';
+      };
+      image.src = candidates[index++];
+    }
+    tryNext();
+  }
+  $('#url').oninput = event => {
+    clearTimeout(faviconTimer);
+    faviconTimer = setTimeout(() => requestFavicon(event.target.value), 350);
+  };
+
+  function editor(item, category) {
+    $('#form-title').textContent = item ? '编辑资源' : '添加资源'; $('#id').value = item?.id || ''; $('#name').value = item?.name || ''; $('#url').value = item?.url || ''; $('#description').value = item?.description || '';
+    $('#category').innerHTML = base.map(entry => `<option value="${entry.id}" ${(item?.category || category) === entry.id ? 'selected' : ''}>${entry.title}</option>`).join('');
+    clearTimeout(faviconTimer);
+    requestFavicon($('#url').value, item?.icon || '');
+    $('#editor').showModal();
+  }
+  let suggestionTimer = null;
+  let suggestionIndex = -1;
+  let suggestionRequest = 0;
+  function hideSuggestions() { $('#baidu-suggestions').hidden = true; suggestionIndex = -1; }
+  function baiduSearch() { const q = $('#query').value.trim(); if (q) window.open(`https://www.baidu.com/s?wd=${encodeURIComponent(q)}`, '_blank', 'noopener'); else window.open('https://www.baidu.com', '_blank', 'noopener'); hideSuggestions(); }
+  function appendHighlightedText(button, text, query) {
+    const value = String(text), needle = String(query).trim();
+    if (!needle) { button.append(document.createTextNode(value)); return; }
+    const start = value.toLocaleLowerCase().indexOf(needle.toLocaleLowerCase());
+    if (start < 0) { button.append(document.createTextNode(value)); return; }
+    button.append(document.createTextNode(value.slice(0, start)));
+    const match = document.createElement('span'); match.className = 'match'; match.textContent = value.slice(start, start + needle.length); button.append(match);
+    button.append(document.createTextNode(value.slice(start + needle.length)));
+  }
+  function renderSuggestions(suggestions, query) {
+    const box = $('#baidu-suggestions'); box.replaceChildren();
+    suggestions.slice(0, 8).forEach((text, index) => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'baidu-suggestion'; button.setAttribute('role', 'option'); appendHighlightedText(button, text, query);
+      button.onmousedown = event => { event.preventDefault(); $('#query').value = text; baiduSearch(); };
+      button.dataset.index = index; box.append(button);
+    });
+    box.hidden = !box.children.length;
+  }
+  function requestSuggestions(query) {
+    if (!query.trim()) { hideSuggestions(); return; }
+    const requestId = ++suggestionRequest;
+    const callback = `baiduSuggestion_${Date.now()}`;
+    window[callback] = data => { if (requestId === suggestionRequest) renderSuggestions(Array.isArray(data?.s) ? data.s : [], query); delete window[callback]; script.remove(); };
+    const script = document.createElement('script'); script.src = `https://suggestion.baidu.com/su?wd=${encodeURIComponent(query)}&cb=${callback}`;
+    script.onerror = () => { delete window[callback]; script.remove(); hideSuggestions(); }; document.head.append(script);
+  }
+  function activateSuggestion(next) {
+    const options = [...document.querySelectorAll('.baidu-suggestion')]; if (!options.length) return false;
+    suggestionIndex = (next + options.length) % options.length;
+    options.forEach((option, index) => option.classList.toggle('active', index === suggestionIndex)); options[suggestionIndex].scrollIntoView({ block: 'nearest' }); return true;
+  }
+  $('#query').oninput = event => { clearTimeout(suggestionTimer); suggestionTimer = setTimeout(() => requestSuggestions(event.target.value), 160); };
+  $('#query').onkeydown = event => {
+    if (event.key === 'ArrowDown') { event.preventDefault(); activateSuggestion(suggestionIndex + 1); }
+    else if (event.key === 'ArrowUp') { event.preventDefault(); activateSuggestion(suggestionIndex - 1); }
+    else if (event.key === 'Escape') { hideSuggestions(); }
+    else if (event.key === 'Enter') { event.preventDefault(); const active = document.querySelector('.baidu-suggestion.active'); if (active) $('#query').value = active.textContent; baiduSearch(); }
+  };
+  $('#query').onblur = () => setTimeout(hideSuggestions, 160);
+  const clearSearch = $('#clear-search');
+  if (clearSearch) clearSearch.onclick = () => { $('#query').value = ''; suggestionRequest += 1; hideSuggestions(); $('#query').focus(); };
+  $('#baidu-form').onsubmit = event => { event.preventDefault(); baiduSearch(); };
+  document.onkeydown = event => { if (((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') || (event.key === '/' && document.activeElement.tagName !== 'INPUT')) { event.preventDefault(); $('#query').focus(); } if (event.key === 'Escape') $('#query').blur(); };
+  $('#theme').onclick = () => { state.theme = state.theme === 'dark' ? 'light' : 'dark'; save(); setTheme(); };
+  $('#form').onsubmit = event => {
+    if (event.submitter?.value === 'cancel') return;
+    event.preventDefault(); const url = safeUrl($('#url').value); if (!url) { alert('网址无效：只支持 http:// 或 https:// 开头的地址'); return; }
+    const id = $('#id').value || `custom-${Date.now()}`, old = find(id);
+    const icon = faviconSourceUrl === url ? selectedFavicon : '';
+    const item = { id, name: $('#name').value.trim(), url, description: $('#description').value.trim() || '自定义资源', category: $('#category').value, mark: '', color: '#55799a', icon };
+    if (old && !old.id.startsWith('custom-')) {
+      state.overrides[id] = { name: item.name, url: item.url, description: item.description, category: item.category, icon };
+      state.categories[id] = item.category;
+    } else if (old) state.custom = state.custom.map(entry => entry.id === id ? item : entry);
+    else state.custom.push(item);
+    state.hidden = state.hidden.filter(hiddenId => hiddenId !== id);
+    save(); $('#editor').close(); renderAll();
+  };
+  $('#export').onclick = () => { const link = document.createElement('a'); link.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' })); link.download = 'academic-navigation-config.json'; link.click(); URL.revokeObjectURL(link.href); };
+  $('#import').onchange = event => { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const data = JSON.parse(reader.result); if (!Array.isArray(data.custom) || !Array.isArray(data.favorites) || !Array.isArray(data.recent)) throw new Error(); const custom = data.custom.filter(item => item && safeUrl(item.url)), skipped = data.custom.length - custom.length; state = { ...state, ...data, custom }; delete state.quick; save(); renderAll(); if (skipped) alert(`配置已导入，但有 ${skipped} 条资源的网址不受支持（只允许 http/https），已跳过。`); } catch { alert('配置文件格式无效'); } }; reader.readAsText(file); };
+  function tick() { const date = new Date(); $('#clock').textContent = date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); $('#today').textContent = date.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'short' }); }
+  load(); renderAll(); tick(); setInterval(tick, 10000);
+})();
+
+</script>
+</body></html>
