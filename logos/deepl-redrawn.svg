@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="DeepL 图标">
+  <rect width="128" height="128" rx="18" fill="#fff"/>
+  <path d="M64 5 116 35v58l-52 30L12 93V35L64 5Z" fill="#173b55"/>
+  <path d="m43 43 39 23-29 20" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="43" cy="43" r="10" fill="#fff"/>
+  <circle cx="82" cy="66" r="10" fill="#fff"/>
+  <circle cx="53" cy="86" r="10" fill="#fff"/>
+</svg>
